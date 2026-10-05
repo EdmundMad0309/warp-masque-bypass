@@ -1,0 +1,40 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "in",
+      "listen": "127.0.0.1",
+      "listen_port": 7890,
+      "set_system_proxy": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "socks",
+      "tag": "warp-masque",
+      "server": "127.0.0.1",
+      "server_port": 1080,
+      "version": "5"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
+    ],
+    "final": "warp-masque"
+  }
+}

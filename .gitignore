@@ -1,0 +1,16 @@
+# 账号凭证(包含私钥，绝不能提交)
+usque/config.json
+*.toml
+*.conf
+reg.json
+
+# 下载的二进制
+usque/usque
+usque/*.zip
+usque/checksums.txt
+usque/LICENSE.md
+usque/README.md
+
+# 日志
+*.log
+.DS_Store
