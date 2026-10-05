@@ -11,6 +11,10 @@ usque/checksums.txt
 usque/LICENSE.md
 usque/README.md
 
+# App 编译产物
+app/build/
+launchd/
+
 # 日志
 *.log
 .DS_Store

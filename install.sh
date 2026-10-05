@@ -78,5 +78,19 @@ plist com.warp.singbox "$DIR" "$DIR/singbox.log" \
   "$SINGBOX" run -c "$DIR/singbox.json"
 echo "==> 已写入 $LA/com.warp.{usque,singbox}.plist (SNI=$SNI)"
 
-# 6. 启动
+# 6. 记录安装目录，供图形界面 App 使用
+mkdir -p "$HOME/Library/Application Support/WarpSwitch"
+printf '%s' "$DIR" > "$HOME/Library/Application Support/WarpSwitch/base"
+
+# 7. 编译安装图形界面 App(可选，需要 Xcode 命令行工具)
+if [[ "${SKIP_APP:-0}" != 1 ]]; then
+  if command -v swiftc >/dev/null; then
+    echo "==> 编译图形界面 App「WARP 开关」"
+    "$DIR/app/build.sh" || echo "⚠️  App 编译失败，不影响命令行使用"
+  else
+    echo "ℹ️  未找到 swiftc，跳过图形界面 App。安装 xcode-select --install 后运行 app/build.sh 即可"
+  fi
+fi
+
+# 8. 启动
 exec "$DIR/start.sh"
