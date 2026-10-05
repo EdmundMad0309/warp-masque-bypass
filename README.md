@@ -22,22 +22,45 @@ Cloudflare WARP 的默认传输协议是 WireGuard（UDP）。校园网/企业�
 
 ---
 
-## 图形界面
+## 下载（推荐）
 
-安装完成后，从启动台或 Spotlight 搜索「WARP 开关」打开桌面 App：
+**[⬇️ 下载 WARP 开关 for macOS](https://github.com/EdmundMad0309/warp-masque-bypass/releases/latest)**：在 Releases 页面下载 `WARP-Switch-x.y.z.dmg`。Apple 芯片和 Intel Mac 通用，需要 macOS 13 或更新版本。
 
 ![WARP 开关截图](docs/screenshot.png)
 
-- **主窗口**：显示连接状态、出口 IP、节点、伪装 SNI，一键开启/关闭
-- **开机自启**：登录时自动连接，菜单栏常驻图标
-- **菜单栏图标**：关掉窗口后图标保留，点击可快速开关或重新打开窗口
-- **退出 App**：只关闭界面，不断开连接
+1. 打开 DMG，把「WARP 开关」拖到 Applications（应用程序）文件夹
+2. 从启动台打开，点「同意条款并注册」。App 会自动注册一个免费 WARP 账号并连接
+3. 完成。不需要 Homebrew，也不需要命令行
 
-> 第一次打开时如果 macOS 提示"无法验证开发者"，在 Finder 中右键选"打开"即可（本地自签名，未经 Apple 公证）。
+**如果 macOS 提示"无法打开"或"无法验证开发者"**（本软件未经 Apple 公证）：打开 系统设置 → 隐私与安全性，在页面底部点「仍要打开」。
+
+### App 功能
+
+- **开启 / 关闭**：一键切换。关闭时自动清除系统代理
+- **开机自启**：登录时自动连接，菜单栏常驻图标
+- **状态信息**：出口 IP、节点、伪装 SNI、本机代理端口
+- **修改伪装 SNI**：点 SNI 旁的铅笔，或 App 菜单 → 修改伪装 SNI
+- **菜单栏图标**：关掉窗口后图标保留，可快速开关
+- **完全卸载**：App 菜单 → 完全卸载…（删除账号、配置和自启项），然后把 App 拖到废纸篓
+
+App 的数据保存在 `~/Library/Application Support/WarpSwitch/`，日志在其中的 `logs/` 目录。如果之前用命令行版装过，App 会自动沿用原来的 WARP 账号。
+
+### 自己编译 App
+
+```bash
+brew install go                 # 编译内置的 sing-box 需要
+cd app
+./package.sh                    # 输出 app/dist/WARP-Switch-1.0.0.dmg
+# 或者 ./build.sh --install     # 直接安装到 /Applications
+```
 
 ---
 
-## 快速开始
+## 命令行版（高级）
+
+不想用 App 的话，也可以用脚本安装。需要 Homebrew。
+
+### 快速开始
 
 ```bash
 git clone https://github.com/EdmundMad0309/warp-masque-bypass.git

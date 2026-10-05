@@ -13,6 +13,8 @@ usque/README.md
 
 # App 编译产物
 app/build/
+app/dist/
+app/vendor/
 launchd/
 
 # 日志

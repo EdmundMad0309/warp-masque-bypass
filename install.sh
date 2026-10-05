@@ -82,15 +82,9 @@ echo "==> 已写入 $LA/com.warp.{usque,singbox}.plist (SNI=$SNI)"
 mkdir -p "$HOME/Library/Application Support/WarpSwitch"
 printf '%s' "$DIR" > "$HOME/Library/Application Support/WarpSwitch/base"
 
-# 7. 编译安装图形界面 App(可选，需要 Xcode 命令行工具)
-if [[ "${SKIP_APP:-0}" != 1 ]]; then
-  if command -v swiftc >/dev/null; then
-    echo "==> 编译图形界面 App「WARP 开关」"
-    "$DIR/app/build.sh" || echo "⚠️  App 编译失败，不影响命令行使用"
-  else
-    echo "ℹ️  未找到 swiftc，跳过图形界面 App。安装 xcode-select --install 后运行 app/build.sh 即可"
-  fi
-fi
+# 7. 提示图形界面版本
+echo "ℹ️  想要图形界面？下载 App：https://github.com/EdmundMad0309/warp-masque-bypass/releases/latest"
+echo "   (App 打开后会自动沿用这里注册的 WARP 账号，并接管这两个服务)"
 
 # 8. 启动
 exec "$DIR/start.sh"
